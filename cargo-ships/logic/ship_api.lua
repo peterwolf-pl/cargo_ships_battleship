@@ -233,6 +233,13 @@ function init_ship_globals()
   })
 
   add_ship({
+    name = "battleship",
+    engine = "cargo_ship_engine",
+    engine_scale = 1,
+    engine_at_front = false,
+  })
+
+  add_ship({
     name = "oil_tanker",
     engine = "cargo_ship_engine",
     engine_scale = 1,

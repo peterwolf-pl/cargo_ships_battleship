@@ -204,6 +204,9 @@ local cargo_ship_pictures = {
   }
 }
 
+local battleship_pictures = table.deepcopy(cargo_ship_pictures)
+battleship_pictures.rotated.layers[1].tint = {0.75, 0.75, 0.95}
+
 local oil_tanker_pictures = {
   rotated = {
     layers = {
@@ -585,6 +588,31 @@ cargo_ship.factoriopedia_simulation = nil
 cargo_ship.corpse = nil
 
 ----------------------------------------------------------------
+------------------------ BATTLESHIP ----------------------------
+----------------------------------------------------------------
+
+local battleship = table.deepcopy(cargo_ship)
+battleship.name = "battleship"
+battleship.icons = {
+  {
+    icon = GRAPHICSPATH .. "icons/cargoship_icon.png",
+    icon_size = 64,
+    tint = {0.75, 0.75, 0.95}
+  },
+  {
+    icon = "__base__/graphics/icons/gun-turret.png",
+    icon_size = 64,
+    scale = 0.5,
+    shift = {8, 8}
+  }
+}
+battleship.icon = nil
+battleship.minable = {mining_time = 1, result = "battleship"}
+battleship.max_health = 7500
+battleship.inventory_size = 800
+battleship.pictures = battleship_pictures
+
+----------------------------------------------------------------
 ------------------------ OIL TANKER ----------------------------
 ----------------------------------------------------------------
 
@@ -725,4 +753,58 @@ cargo_ship_engine.drive_over_tie_trigger = nil
 cargo_ship_engine.factoriopedia_simulation = nil
 cargo_ship_engine.corpse = nil
 
-data:extend{cargo_ship_engine, cargo_ship, oil_tanker, indep_boat, boat, boat_engine}
+----------------------------------------------------------------
+------------------------ BATTLESHIP CANNONS --------------------
+----------------------------------------------------------------
+
+local battleship_cannon_base = table.deepcopy(data.raw["gun-turret"]["gun-turret"])
+battleship_cannon_base.flags = {
+  "placeable-off-grid",
+  "not-on-map",
+  "not-blueprintable",
+  "not-deconstructable"
+}
+battleship_cannon_base.max_health = 1200
+battleship_cannon_base.minable = nil
+battleship_cannon_base.collision_box = {{0, 0}, {0, 0}}
+battleship_cannon_base.selection_box = {{0, 0}, {0, 0}}
+battleship_cannon_base.selection_priority = 0
+battleship_cannon_base.order = "z[battleship-cannon]"
+battleship_cannon_base.attack_parameters.range = 28
+battleship_cannon_base.attack_parameters.cooldown = 20
+battleship_cannon_base.icons = {
+  {
+    icon = "__base__/graphics/icons/gun-turret.png",
+    icon_size = 64,
+    tint = {0.75, 0.75, 0.95}
+  }
+}
+battleship_cannon_base.icon = nil
+battleship_cannon_base.corpse = nil
+battleship_cannon_base.damaged_trigger_effect = nil
+
+local battleship_cannon_1 = table.deepcopy(battleship_cannon_base)
+battleship_cannon_1.name = "battleship-cannon-1"
+
+local battleship_cannon_2 = table.deepcopy(battleship_cannon_base)
+battleship_cannon_2.name = "battleship-cannon-2"
+
+local battleship_cannon_3 = table.deepcopy(battleship_cannon_base)
+battleship_cannon_3.name = "battleship-cannon-3"
+
+local battleship_cannon_4 = table.deepcopy(battleship_cannon_base)
+battleship_cannon_4.name = "battleship-cannon-4"
+
+data:extend{
+  cargo_ship_engine,
+  cargo_ship,
+  battleship,
+  oil_tanker,
+  indep_boat,
+  boat,
+  boat_engine,
+  battleship_cannon_1,
+  battleship_cannon_2,
+  battleship_cannon_3,
+  battleship_cannon_4
+}

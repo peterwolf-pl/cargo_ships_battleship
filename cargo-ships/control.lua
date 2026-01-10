@@ -33,6 +33,174 @@ is_rail = util.list_to_map{
   "rail-ramp",
 }
 
+local BATTLESHIP_NTH_TICK = 10
+local battleship_turret_names = {
+  "battleship-cannon-1",
+  "battleship-cannon-2",
+  "battleship-cannon-3",
+  "battleship-cannon-4",
+}
+local battleship_offsets = {
+  {x = -1.6, y = -5.6},
+  {x = 1.6, y = -2.4},
+  {x = -1.6, y = 2.4},
+  {x = 1.6, y = 5.6},
+}
+local battleship_ammo_whitelist = {
+  "uranium-rounds-magazine",
+  "piercing-rounds-magazine",
+  "firearm-magazine",
+}
+
+local function rotate_offset(offset, orientation)
+  local angle = orientation * 2 * math.pi
+  local cos_angle = math.cos(angle)
+  local sin_angle = math.sin(angle)
+  return {
+    x = offset.x * cos_angle - offset.y * sin_angle,
+    y = offset.x * sin_angle + offset.y * cos_angle,
+  }
+end
+
+local function ensure_battleship_storage()
+  storage.battleships = storage.battleships or {}
+end
+
+local function remove_battleship_entry(entry)
+  if entry and entry.turrets then
+    for _, turret in pairs(entry.turrets) do
+      if turret and turret.valid then
+        turret.destroy()
+      end
+    end
+  end
+end
+
+local function create_battleship_turret(ship, index)
+  local offset = rotate_offset(battleship_offsets[index], ship.orientation)
+  local position = {
+    x = ship.position.x + offset.x,
+    y = ship.position.y + offset.y,
+  }
+  local turret = ship.surface.create_entity{
+    name = battleship_turret_names[index],
+    position = position,
+    force = ship.force,
+    create_build_effect_smoke = false,
+  }
+  if turret then
+    turret.operable = false
+  end
+  return turret
+end
+
+local function sync_battleship_turrets(entry)
+  local ship = entry.ship
+  if not (ship and ship.valid) then
+    return
+  end
+  entry.turrets = entry.turrets or {}
+  for index = 1, #battleship_offsets do
+    local turret = entry.turrets[index]
+    if not (turret and turret.valid) then
+      turret = create_battleship_turret(ship, index)
+      entry.turrets[index] = turret
+    end
+    if turret and turret.valid then
+      local offset = rotate_offset(battleship_offsets[index], ship.orientation)
+      turret.teleport({ship.position.x + offset.x, ship.position.y + offset.y})
+      turret.force = ship.force
+    end
+  end
+end
+
+local function refill_battleship_ammo(entry)
+  local ship = entry.ship
+  if not (ship and ship.valid) then
+    return
+  end
+  local cargo_inventory = ship.get_inventory(defines.inventory.cargo_wagon)
+  if not cargo_inventory or cargo_inventory.is_empty() then
+    return
+  end
+  for _, turret in pairs(entry.turrets or {}) do
+    if turret and turret.valid then
+      local ammo_inventory = turret.get_inventory(defines.inventory.turret_ammo)
+      if ammo_inventory and ammo_inventory.is_empty() then
+        for _, ammo_name in ipairs(battleship_ammo_whitelist) do
+          local available = cargo_inventory.get_item_count(ammo_name)
+          if available > 0 then
+            local stack_size = game.item_prototypes[ammo_name].stack_size
+            local to_move = math.min(available, stack_size)
+            local inserted = ammo_inventory.insert{name = ammo_name, count = to_move}
+            if inserted > 0 then
+              cargo_inventory.remove{name = ammo_name, count = inserted}
+            end
+            break
+          end
+        end
+      end
+    end
+  end
+end
+
+local function ensure_battleship_entry(ship)
+  if not (ship and ship.valid) then
+    return nil
+  end
+  ensure_battleship_storage()
+  local entry = storage.battleships[ship.unit_number]
+  if not entry then
+    entry = {ship = ship, turrets = {}}
+    storage.battleships[ship.unit_number] = entry
+  else
+    entry.ship = ship
+  end
+  sync_battleship_turrets(entry)
+  return entry
+end
+
+local function remove_battleship(ship)
+  if not ship then
+    return
+  end
+  ensure_battleship_storage()
+  local entry = storage.battleships[ship.unit_number]
+  if entry then
+    remove_battleship_entry(entry)
+    storage.battleships[ship.unit_number] = nil
+  end
+end
+
+local function OnBattleshipNthTick()
+  if not storage.battleships then
+    return
+  end
+  for unit_number, entry in pairs(storage.battleships) do
+    if not (entry.ship and entry.ship.valid) then
+      remove_battleship_entry(entry)
+      storage.battleships[unit_number] = nil
+    else
+      sync_battleship_turrets(entry)
+      refill_battleship_ammo(entry)
+    end
+  end
+end
+
+local function RegisterBattleshipNthTick()
+  script.on_nth_tick(BATTLESHIP_NTH_TICK, OnBattleshipNthTick)
+end
+
+local function InitializeBattleships()
+  ensure_battleship_storage()
+  for _, surface in pairs(game.surfaces) do
+    local ships = surface.find_entities_filtered{name = "battleship"}
+    for _, ship in pairs(ships) do
+      ensure_battleship_entry(ship)
+    end
+  end
+end
+
 
 -- spawn additional invisible entities
 local function OnEntityBuilt(event)
@@ -109,6 +277,9 @@ local function OnEntityBuilt(event)
     -- check placement in next tick after wagons connect
     table.insert(storage.check_placement_queue, {entity=entity, engine=engine, player=player, robot=event.robot})
     RegisterPlacementOnTick()
+    if entity.name == "battleship" then
+      ensure_battleship_entry(entity)
+    end
   -- add oilrig component entities
   elseif entity.name == "oil_rig" then
     CreateOilRig(entity, player, event.robot)
@@ -180,6 +351,9 @@ local function OnEntityDeleted(event)
   local entity = event.entity
   if(entity and entity.valid) then
     if storage.ship_bodies[entity.name] then
+      if entity.name == "battleship" then
+        remove_battleship(entity)
+      end
       if entity.train then
         if entity.train.back_stock then
           if storage.ship_engines[entity.train.back_stock.name] then
@@ -304,6 +478,9 @@ end
 local function OnRobotMinedEntity(event)
   if event.entity and event.entity.valid then
     local entity = event.entity
+    if entity.name == "battleship" then
+      remove_battleship(entity)
+    end
     if storage.ship_bodies[entity.name] or storage.ship_engines[entity.name] then
       -- Find attached engine or body to mine
       local otherstock = entity.get_connected_rolling_stock(defines.rail_direction.front) or 
@@ -321,6 +498,9 @@ local function OnPlayerMinedEntity(event)
   local entity = event.entity
   local player = game.players[event.player_index]
   if entity and entity.valid then
+    if entity.name == "battleship" then
+      remove_battleship(entity)
+    end
     storage.currently_mining = storage.currently_mining or {}
     if not storage.currently_mining[entity.unit_number] then
       if storage.ship_bodies[entity.name] or storage.ship_engines[entity.name] then
@@ -484,6 +664,9 @@ function init_events()
   
   -- update visuals
   RegisterVisualsNthTick()
+
+  -- battleship turrets/ammo
+  RegisterBattleshipNthTick()
   
   -- long reach
   script.on_event(defines.events.on_player_cursor_stack_changed, OnStackChanged)
@@ -538,8 +721,10 @@ local function init()
   storage.disable_this_tick = storage.disable_this_tick or {}
   storage.driving_state_locks = storage.driving_state_locks or {}
   storage.currently_mining = storage.currently_mining or {}
+  storage.battleships = storage.battleships or {}
 
   init_ship_globals()  -- Init database of ship parameters
+  InitializeBattleships()
 
   -- Initialize or migrate long reach state
   storage.last_cursor_stack_name =
@@ -596,4 +781,3 @@ setmetatable(_ENV,{
       .. serpent.line{key=key or '<nil>'}..'\n')
     end ,]]
   })
-

@@ -47,6 +47,27 @@ data:extend ({
 },
 {
   type = "technology",
+  name = "battleship",
+  icon = GRAPHICSPATH .. "technology/cargo_ships.png",
+  icon_size = 256,
+  effects = {
+    unlock("battleship"),
+  },
+  prerequisites = {"cargo_ships", "military-3"},
+  unit = {
+    count = 250,
+    ingredients = {
+      {"automation-science-pack", 1},
+      {"logistic-science-pack", 1},
+      {"military-science-pack", 1},
+      {"chemical-science-pack", 1},
+    },
+    time = 30
+  },
+  order = "c-g-a",
+},
+{
+  type = "technology",
   name = "automated_water_transport",
   icon = GRAPHICSPATH .. "technology/automated_water_transport.png",
   icon_size = 256,
