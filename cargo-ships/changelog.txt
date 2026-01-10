@@ -1,0 +1,976 @@
+---------------------------------------------------------------------------------------------------
+Version: 1.0.28
+Date: 2025-12-19
+  Changes:
+    - Reduced number of collision layers used by Floating Power Pole.
+    - Reduced log output of collision layer updates.
+    - Reduced crude oil fuel value from 100MJ to 20MJ.
+  Bugfixes:
+    - Fixed crash when other mods alter vanilla entity icon definitions.
+    - Fixed that crude oil was given a fuel value even when oil rig generator was disabled.
+---------------------------------------------------------------------------------------------------
+Version: 1.0.27
+Date: 2025-10-18
+  Bugfixes:
+    - Fixed that waterways super-force-built over landfill would not be revived after the landfill was removed.
+    - Fixed building waterways over fish for real this time, by adding optional dependency on space-exploration.
+    - Fixed that oil rigs could not be built on top of fish when space exploration was installed.
+    - Fixed that pipetting waterways in cheat mode would give actual items instead of ghost.
+---------------------------------------------------------------------------------------------------
+Version: 1.0.26
+Date: 2025-10-05
+  Changes:
+    - Reduced warm-up time of the Oil rig pump heater.
+  Bugfixes:
+    - Fixed crash when picking up blueprints from inventory.
+    - Removed debug prints from DestroyOilRig().
+---------------------------------------------------------------------------------------------------
+Version: 1.0.25
+Date: 2025-10-05
+  Features:
+    - Oil Rig now provides heating for adjacent pumps on Aquilo.
+    - Added settings to allow Floating electric pole on Oil ocean and Ammoniacal ocean (off by default).
+  Changes:
+    - Added compatibility with AAI Industries (and Space Exploration) "processed chemical" fuel.
+  Bugfixes:
+    - Fixed that waterways could not be placed on top of fish when AAI Industries/Space Exploration was installed.
+    - Fixed that pump placement squares would appear even if selected blueprint (from a book) did not have pumps in it.
+    - Fixed that super-force-placing Waterways on top of Landfill would not actually build waterways.
+---------------------------------------------------------------------------------------------------
+Version: 1.0.24
+Date: 2025-09-25
+  Bugfixes:
+    - Fixed collision mask corruption of vanilla straight rails (Fixes compatibility with Hovercrafts and Space Exploration among others). Thanks to Chips and Sasa for the report debugging help!
+---------------------------------------------------------------------------------------------------
+Version: 1.0.23
+Date: 2025-09-01
+  Changes:
+    - Offshore oil deposits now will be non-infinite if Crude oil deposits are also non-infinite (Krastorio2 compatibility).
+    - Offshore oil deposits now copy the map color of Crude oil deposits.
+  Bugfixes:
+    - Fixed crash when holding non-uploaded blueprint book in multiplayer (for real this time).
+    - Fixed that pumps could be placed on top of other entities.
+---------------------------------------------------------------------------------------------------
+Version: 1.0.21
+Date: 2025-08-14
+  Bugfixes:
+    - Fixed compatibility with Minimal Electric Rails and other upgradeable rail mods.
+---------------------------------------------------------------------------------------------------
+Version: 1.0.20
+Date: 2025-08-03
+  Changes:
+    - Changed deprecated API call LuaPlayer::pipette_entity() to LuaPlayer::pipette() per 2.0.59 release notes.
+    - Updated Hungarian translation from Crowdin
+  Bugfixes:
+    - Fixed that quality of items could be reset when robots deconstruct a ship.
+---------------------------------------------------------------------------------------------------
+Version: 1.0.19
+Date: 2025-05-06
+  Bugfixes:
+    - Fixed crash when enabling floating electric pole.
+---------------------------------------------------------------------------------------------------
+Version: 1.0.18
+Date: 2025-05-06
+  Bugfixes:
+    - Fixed compatibility with Krastorio2 (for real this time).
+    - Fixed the setting to disable floating electric pole.
+---------------------------------------------------------------------------------------------------
+Version: 1.0.17
+Date: 2025-05-04
+  Bugfixes:
+    - Fixed compatibility with Krastorio2.
+---------------------------------------------------------------------------------------------------
+Version: 1.0.16
+Date: 2025-03-24
+  Bugfixes:
+    - Fixed compatibility with Renai Transportation.
+    - Fixed another crash with mods that disable Nauvis.
+---------------------------------------------------------------------------------------------------
+Version: 1.0.15
+Date: 2025-03-16
+  Bugfixes:
+    - Fixed that Boats could drive over elevated rail supports.
+    - Fixed that Buoys could be placed as elevated rail signals.
+    - Fixed compatibility with Subsurface mod.
+    - Fixed compatibility with mods that disable Nauvis or Aquilo map generation (including Solar System++).
+---------------------------------------------------------------------------------------------------
+Version: 1.0.14
+Date: 2025-01-20
+  Features:
+    - Added setting to disable Floating electric pole.
+  Changes:
+    - Floating electric pole is now prohibited in Fulgora deep oil oceans.
+    - Cleaned up dependency list.
+  Bugfixes:
+    - Fixed crash when cancelling deconstruction requests not associated with an active player.
+    - Fixed crash when adding Cargo Ships to a save where Nauvis entity autoplace has been completely disabled.
+---------------------------------------------------------------------------------------------------
+Version: 1.0.13
+Date: 2024-11-26
+  Changes:
+    - Allow offshore oil in shallow water by default, to increase the odds of generation.
+  Bugfixes:
+    - Fixed that Oil Processing tech would not unlock when offshore oil deposits are mined.
+    - Fixed crash when mod setting disables offshore-oil and oil rig.
+    - Fixed that console command /set-oil-settings applied to wrong resources.
+---------------------------------------------------------------------------------------------------
+Version: 1.0.12
+Date: 2024-11-19
+  Features:
+    - [space-age] Added offshore oil generation to Aquilo.
+    - Added console commands to help adding offshore oil generation to existing/migrated maps.
+  Changes:
+    - Updated waterway shortcut icon resolution for 2.0.18.
+    - Eliminated one custom collision layer used in offshore oil placement.
+    - Updated translations from Crowdin.
+  Bugfixes:
+    - Fixed that ships could be placed without engines attached.
+    - Fixed that offshore oil generation was not added to Nauvis when Cargo Ships mod is added to an existing save or migrated from 1.1.
+    - Fixed inconsistencies and error messages when entering/leaving ships and other vehicles.
+    - [space-age] Fixed ice tiles spawning around crude oil near water.
+    - Fixed that automatic bridge chain signals were visible.
+    - Fixed that dummy migration oil rig was visisble in some tooltips.
+    - Fixed that buoys could not be placed on lava ^_^
+---------------------------------------------------------------------------------------------------
+Version: 1.0.11
+Date: 2024-11-09
+  Changes:
+    - Updated signal buoy graphics for 2.0. Note: selection boxes don't line up due to game bug as of 2.0.16.
+---------------------------------------------------------------------------------------------------
+Version: 1.0.10
+Date: 2024-10-28
+  Changes:
+    - Updated translations from Crowdin.
+    - Removed dependency on RSO (the old RSO compatibility code has been removed).
+  Bugfixes:
+    - Fix compatibility with Shallow Water Landfill Fix for real this time.
+---------------------------------------------------------------------------------------------------
+Version: 1.0.9
+Date: 2024-10-28
+  Bugfixes:
+    - Fix loading crash when water tile collision masks have been modified.
+---------------------------------------------------------------------------------------------------
+Version: 1.0.8
+Date: 2024-10-23
+  Changes:
+    - Tweaked the oil rig sounds so oil pumping is more prominent than steam engine.
+  Bugfixes:
+    - Fixed that when loading a save from 1.1, migrated oil rigs only had 5k oil in them (of the expected 100k). Note: This will not affect saves that have already been migrated.
+---------------------------------------------------------------------------------------------------
+Version: 1.0.7
+Date: 2024-10-22
+  Bugfixes:
+    - Attempt number 3 to fix blueprint handling crashes.
+    - Added migration to fix migrated waterways that were still set to be unminable.
+---------------------------------------------------------------------------------------------------
+Version: 1.0.6
+Date: 2024-10-22
+  Bugfixes:
+    - Fixed crash when holding a nested blueprint book and non-blueprint planners. Library books are only searched on the first level; inventory books are searched recursively.
+---------------------------------------------------------------------------------------------------
+Version: 1.0.5
+Date: 2024-10-21
+  Changes:
+    - Handle pump visualisations when holding blueprint books from inventory and library.
+  Bugfixes:
+    - Fixed crash when using blueprints from Blueprint Library.
+---------------------------------------------------------------------------------------------------
+Version: 1.0.4
+Date: 2024-10-20
+  Changes:
+    - Updated Offshore Oil graphics and map generation defaults.
+    - Merged signal buoys into Automated Water Transport technology.
+    - First batch of translation updates from Crowdin. Please contribute updates there!
+  Bugfixes:
+    - Fixed pipetting ship engines and oil rig tanks to get ghost items (thanks to new feature in Factorio 2.0.7).
+    - Fixed incorrect entries in Factoriopedia.
+---------------------------------------------------------------------------------------------------
+Version: 1.0.3
+Date: 2024-10-18
+  Changes:
+    - Added new waterway graphics.
+  Bugfixes:
+    - Fixed ship pump visualisations not being shown in remote view or when holding ghosts.
+---------------------------------------------------------------------------------------------------
+Version: 1.0.2
+Date: 2024-10-17
+  Changes:
+    - When placing ships or oil rigs with quality, ship engine and oil_rig components receive the same quality.
+    - Removed "placing_item" parameter from Ship API definitions.  Use EntityPrototype::items_to_place_this instead.
+    - Set oil_rig item back to stack_size=5.
+    - Performance improvements around event subscriptions and function calls.
+  Bugfixes:
+    - Preserve quality when pipetting ships and oil rigs (total rewrite of pipette logic to use built-in functionality).
+    - Fixed some weirdness with undo/redo. Still not perfect.
+---------------------------------------------------------------------------------------------------
+Version: 1.0.1
+Date: 2024-10-15
+  Features:
+    - Ship engines are now deconstructable and minable.  Mining the engine will also mine the ship body.
+    - When robots deconstruct a ship, there will be enough dispatched to empty the engine fuel in one trip.
+  Bugfixes:
+    - Fixed that undoing a blueprinted ship construction could trigger a game bug crash.
+    - Fixed that undoing the mining of a ship engine could create an orphaned ship engine ghost.
+---------------------------------------------------------------------------------------------------
+Version: 1.0.0
+Date: 2024-10-08
+  Features:
+    - Factorio 2.0 pre-release
+    - Overhauled the Oil Rig to add often-requested features and improve performance:
+    - Oil rigs now contain an actual storage tank that shows its fluid level and can be connected to the circuit network.
+    - Oil rig pumpjack can also be connected to the circuit network to read the oil patch mining rate.
+    - Oil rigs now have 4 pipe connection points and can pass through fluid, and can no longer be rotated.
+    - Oil rigs and their components can be blueprinted.
+    - Overhauled Offshore Oil generation:
+    - Offshore oil is now treated as a separate resource on the map generation page. It will only generate on Nauvis.
+    - Overhauled Lifting Bridges to improve performance:
+    - Lifting Bridges can be fully blueprinted, ghost-placed, robot-build, destroyed by damage, and rebuilt by robots.
+    - Lifting Bridges now use the gate prototype to stay open normally, and close automatically when trains (or players) approach without the need for scripted entity creation/deletion.
+  Changes:
+    - Oil rigs now consume oil to generate power (this improves the smoke graphics performance and visuals).
+    - Oil rig component icons now show what part they are (generator, radar, pole or tank).
+    - Oil rig animations are improved, and power pole is shown in the graphic.
+    - Removed the setting to disable oil on land. Do this by disabling Crude Oil in map generation. Remember to manually enable the "No oil for oil rig" option to unlock the technology correctly.
+    - Removed setting to set offshore oil richness. Do this with the resource generation sliders now.
+    - Stack size for big ships and oil rig reduced to 1.
+    - There will be some graphical glitches with Lifting Bridges if trains or ships traverse before the bridge state settles, but it will always return to a good state and requires no scripting overhead to function.
+    - Future possibility to use additional signals and circuit wires to enforce bridge state without scripts.
+    - Many minor graphical and performance improvements.
+  Bugfixes:
+    - Fixed that blueprinting ships and boats on waterways would not store fuel requests.
+    - Fixed that oil rig smoke would continue even when it was not working.
+    - Fixed that ships could accidentally couple to each other (for real this time).
+    - Eliminated many, many corner cases for invisible entities to get messed up.
+---------------------------------------------------------------------------------------------------
+Version: 0.2.7
+Date: 2024-06-30
+  Bugfixes:
+    - Fix tech tree bug when offshore oil is the only oil available.
+  Changes:
+    - Updated German translation thanks to bartschinski.
+---------------------------------------------------------------------------------------------------
+Version: 0.2.6
+Date: 2023-11-14
+  Bugfixes:
+    - Fix potential crash when pipetting waterways.
+---------------------------------------------------------------------------------------------------
+Version: 0.2.5
+Date: 2023-11-13
+  Bugfixes:
+    - Fixed that oil rig power pole could be mined.
+    - Fixed crash when opening Oil Rig GUI if another mod changed offshore oil into a solid resource.
+    - Fixed pipetting a waterway when setting "Pick Ghost if no items are available" is disabled.
+  Changes:
+    - Updated Japanese translation thanks to YAMATO_Hajime.
+---------------------------------------------------------------------------------------------------
+Version: 0.2.4
+Date: 2023-09-08
+  Bugfixes:
+    - Fixed crash when attempting to enter a ship that is already occupied.
+---------------------------------------------------------------------------------------------------
+Version: 0.2.3
+Date: 2023-07-26
+  Features:
+    - Added startup setting to configure Oil Rig power source.
+    - Oil rigs can connect directly to power poles when grid connection is enabled.
+  Changes:
+    - Re-allow AI Boat when using AAI Programmable Vehicles.
+    - Display ship loading pump locations when holding blueprints with pumps in them.
+    - Added Chinese translation thanks to MegaMU.
+---------------------------------------------------------------------------------------------------
+Version: 0.2.2
+Date: 2023-05-26
+  Features:
+    - Added "tips and tricks" entry to demonstrate Waterway shortcut item use.
+  Changes:
+    - Updated Japanese translation thanks to YAMATO_Hajime.
+    - Updated Russian translation thanks to Astorin.
+  Bugfixes:
+    - Player now collides with pump again (pump can still be placed on water for ship loading).
+---------------------------------------------------------------------------------------------------
+Version: 0.2.1
+Date: 2023-05-14
+  Bugfixes:
+    - Fixed crash when loading with Krastorio2 and other pump-upgrade mods.
+---------------------------------------------------------------------------------------------------
+Version: 0.2.0
+Date: 2023-05-14
+  Changes:
+    - Waterways are now accessed using a shortcut button or ‘Alt + W’ instead of a free recipe
+    - 'Ghost' waterways are now instantly 'revived', and marked-for-deconstruction waterways are instantly destroyed
+    - You can now enter and exit ships at a distance using 'Enter' rather than 'Shift + Enter'
+    - Boat no longer collides with buoys and offshore oil
+    - Removed ship loading pump, regular pump can now be placed on water
+    - Moved floating electric pole to be next to other electric poles in the crafting menu
+  Bugfixes:
+    - Fixed oil rig power supply area not being correctly centered
+    - Fixed oil rigs having insufficient power when energy consumption is increased by modules
+---------------------------------------------------------------------------------------------------
+Version: 0.1.22
+Date: 2023-02-26
+  Bugfixes:
+    - Made deep_oil deposits able to be destroyed by landfill.
+    - Fixed that crafting time was not specified for some recipes.
+    - Fixed that oil rig emissions were specified incorrectly.
+    - Fixed localised name of waterway rail planner tool.
+    - Made bridge-related "invisible chain signal" hidden.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.21
+Date: 2023-01-22
+  Bugfixes:
+    - Fixed that ships had lower selection priority than waterways.
+    - Fixed that ship-exit command would not work on walkable shallow water.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.20
+Date: 2023-01-06
+  Bugfixes:
+    - Workaround for bug in Tips & Tricks scenario migration script relative path resolution.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.19
+Date: 2023-01-01
+  Features:
+    - Added a remote interface so other mods can add compatible boats and ships.
+  Changes:
+    - Refactored the entity handling code to utilize the data table maintained by the remote interface.
+  Bugfixes:
+    - Fixed that boats, ships, and ship engines left corpse remnants in the water instead of sinking properly.
+    - Fixed that Cargo Ships mod prevented building landfill underneath Beautiful Bridge Railways rails on water.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.18
+Date: 2022-04-03
+  Bugfixes:
+    - Fixed crash in new settings code when loading with other mods.
+    - Fixed some missing setting description strings in locale.
+  Changes:
+    - Changed default setting of "no-shallow-oil" back to True to match the previous default behavior.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.17
+Date: 2022-04-03
+  Features:
+    - Added a setting to disable offshore in shallow water.
+  Changes:
+    - Increased the offshore oil richness bonus for "good" and "very-good" settings.
+    - Changed the default behavior to generate offshore oil in shallow water.
+  Bugfixes:
+    - Fixed behavior of "/regenerate-oil" command when RSO is installed.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.16
+Date: 2022-03-21
+  Changes:
+    - Extended "enter ship" command (Shift-Enter) to work for ship and tanker hulls in addition to engines.
+  Bugfixes:
+    - Fixed potential issue synchronizing settings to a multiplayer game if deep sea oil is disabled on server.
+    - Fixed crash in old migration code if deep sea oil is disabled.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.15
+Date: 2022-02-06
+  Bugfixes:
+    - Fixed that deep_oil entity could not be placed on water in editor.
+  Compatibility:
+    - Added changes for Alien Biomes trees so that they can be chopped on top of ore patches again.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.14
+Date: 2022-01-30
+  Compatibility:
+    - Fixed compatibility with Noxy's Swimming (boat will ignore terrain friction).
+  Changes:
+    - Enlarged range for fuel and speed modifier options.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.13
+Date: 2022-01-16
+  Bugfixes:
+    - Fixed that chemical science was never required for oil rig research.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.12
+Date: 2022-01-12
+  Bugfixes:
+    - Fixed bot placement of waterways using old pre-0.1.0 blueprints.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.11
+Date: 2021-12-16
+  Bugfixes:
+    - Fixed generation of offshore oil with RSO installed.
+    - Added migration to regenerate oil automatically if crude-oil is found on water.
+    - ** Please report any issues with existing oil deposits on land disappearing or changing! **
+---------------------------------------------------------------------------------------------------
+Version: 0.1.10
+Date: 2021-12-11
+  Bugfixes:
+    - Fixed the deeper problem of bridges being invalid (because invisible entities were being damaged)
+---------------------------------------------------------------------------------------------------
+Version: 0.1.9
+Date: 2021-12-11
+  Bugfixes:
+    - Fixed crash when some bridge were invalid.
+  Compatibility:
+    - LTN: logistic ports also get pump markers when placing ship pumps.
+  Visuals:
+    - Adjusted vehicle boat's smoke position.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.8
+Date: 2021-12-07
+  Bugfixes:
+    - Fixed blueprinted waterways sometimes not displaying on map / not correctly placed.
+    - Fixed cargo ship doors animation.
+    - Fixed train wheels not displaying in some parts of bridges.
+  Compatibility:
+    - Krastorio2: K2 fuels compatibility for boats and ships.
+    - Krastorio2: compatibility for deep_oil.
+    - Endgame Extension and other upgrade mods.
+  Features:
+    - Re-introduced light-dark waterways option.
+  Visuals:
+    - Improved position of oil rig circuit connection.
+  Locale:
+    - Updated Polish translation (thanks to jedrzej-p).
+---------------------------------------------------------------------------------------------------
+Version: 0.1.7
+Date: 2021-12-04
+  Features:
+    - Added setting to enable/disable waterways-to-rails connections.
+  Info:
+    - Updated dependancies.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.6
+Date: 2021-12-03
+  Visuals:
+    - Narrowed bridge selection box.
+    - Made fishes shadows so they don't get over other entities.
+  Sound:
+    - Added sound to bridges opening and closing.
+  Bugfixes:
+    - Fixed crash when placing Boats on waterways (real).
+    - Fixed trains not selectable on bridges.
+    - Fixed trains appearing behind bridges.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.5
+Date: 2021-12-02
+  Bugfixes:
+    - Fixed that buildings on ores could not be selected.
+    - Fixed that crash when placing Boats on waterways.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.4
+Date: 2021-12-01
+  Bugfixes:
+    - Fixed that ores might spawn in water accidentally (bug from 0.1.1).
+    - Fixed that placing AI Boat on waterway would result in non-AI railed boats.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.3
+Date: 2021-12-01
+  Bugfixes:
+    - Fixed boat compatibility with AAI Programmable Vehicles.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.2
+Date: 2021-12-01
+  Bugfixes:
+    - Fixed a crash when clicking on pump from a GUI.
+    - Removed obsolete dark waterways setting.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.1
+Date: 2021-12-01
+  Bugfixes:
+    - Fixed not being able to build on ore.
+    - Fixed not being able to build boats outside of water ways.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.0
+Date: 2021-12-01
+  Info:
+    - New/improved visuals by snouz.
+    - Bug fixes, improvements, features and code factorisation by Robot256.
+  Features:
+    - Added option to disable oil on land.
+    - Changed oil generation settings to startup, and lock out oil/oil rig entities and processes when disabled.
+    - Added command "/regenerate-oil " that removes and regenerates all crude oil and offshore oil entities on the given surface, or all surfaces if none is specified.
+    - Added setting to make buoys indestructible (Fix buoys can be destroyed by driving over them with a boat #58).
+  Visuals:
+    - New HD technology icons (8).
+    - New item icons (11).
+    - Unrailed boat: HD version (original render, .5 scale, from 1.2), 256 directions (from 64), improved with filters.
+    - Railed boat: HD version (using AI upscaling, .5 scale, from 1.5), improved with filters.
+    - Oil Tanker: Twice as detailed (original render, .85 scale from 1.7).
+    - Cargo Ship: Twice as detailed (using AI upscaling, .85 scale from 1.7).
+    - Oil Rig: Compelely new HD visuals with proper perspective, animation and custom lights.
+    - Port: Reworked in HD, assed shadow, improved position.
+    - Rails: Recreated in HD, aligned, removed (messy) transparency.
+    - Floating Electric Poles: Reworked in HD.
+    - Buoys and Chain Buoys: Reworked in HD, new lights.
+    - Bridges: HD version, doesn't create smoke on closing.
+    - Added custom water reflection to all entities.
+    - Softer light on boats
+    - Standarized all shadows into a separate layer.
+    - Improved splash effect and added ripple effect.
+    - Custom map icons for big boats
+    - Larger and slightly blurry deep oil.
+  Bugfixes:
+    - Fixed Chain Buoys being unaligned with their selection box
+    - Fixed that using pipette in cheat mode gave uncraftable entities.
+    - Fixed crash when using "enter ship" command while in editor or god mode (by preventing you from entering a boat without a character).
+    - Fixed old typos in changelog.
+    - Fixed that using pipette on bridges gave no or uncraftable entities.
+    - Fixed waterways and railways being interconactable (#56).
+    - Fixed some icons not appearing in the GUI.
+    - Fixed inconsistant or empty icons on deconstruction.
+    - Fixed car backlight appearing behind ships.
+  Optimization:
+    - Added filters to entity created and destroyed events to improve performance.
+    - Compressed some animations to save space.
+    - Sorted files and code.
+    - Separated graphics into its own mod (for avoiding redownloads)
+    - Redesigned offshore oil spawning using the vanilla Crude Oil generation settings. Vanilla oil patches generated at sea are consolidated into Offshore oil deposits if they are far enough from land.
+    - Replaced hidden lamp entities from the oil rig by a simple light layer.
+  Sound:
+    - New sounds for ships (separate sound for boat and engine).
+    - Small boat makes a noise scaled to speed.
+    - Removed Oil rig's (hidden) generator and radar sounds (kept only the pumpjack).
+  Locale:
+    - Fixed typos.
+    - Moved all GUI text and console messages to locale file (EN only for now).
+    - Restructured the locale file to eliminate duplicate text.
+    - Added Polish locale (thanks to RadianOst).
+    - Updated Russian locale (thanks to IgorLutiy & kylichist).
+  Improvements:
+    - Added handling of on_entity_cloned and area & entity cloning in editor and scripts.
+    - Added handling of non-placed waterways in copy-paste generated blueprint.
+    - Added handling of script_raised_revive.
+    - Made ships and boats blueprintable and deconstructable by robots.
+    - Made bridges not deconstructable by robots.
+  Compatibility:
+    - Added compatibility with Water Ores.
+    - Disabled offshore oil for SeaBlock and Omnimatter.
+    - Added conflict with "cargo-ships-seraph" fork to avoid confusion.
+---------------------------------------------------------------------------------------------------
+Version: 0.0.59
+  Bugfixes:
+    - fixed crash when placing waterways
+  Changes:
+    - made boat engine sounds less loud
+---------------------------------------------------------------------------------------------------
+Version: 0.0.58
+  Bugfixes:
+    - fixed oil rigs not working on non-nauvis-surfaces
+    - fixed ship placement not recognizing modded rails (i.e. space exploration rails)
+---------------------------------------------------------------------------------------------------
+Version: 0.0.57
+Date: 2020-12-19
+  Changes:
+    - updated to factorio 1.1
+---------------------------------------------------------------------------------------------------
+Version: 0.0.56
+  Bugfixes:
+    - fixed crash when destroying/deleting oil rig while gui open
+    - fixed hard crash when placing ship very close to existing boat
+  Changes:
+    - added support for passenger riding in small boat
+    - added startup mod option for changing fuel capacities for ships
+    - added czech locale
+---------------------------------------------------------------------------------------------------
+Version: 0.0.55
+  Bugfixes:
+    - fixed deep oil spawning on wrong surface when using mods like space exploration
+    - fixed crash occurring when used in combination with omnimatter
+  Changes:
+    - made inserter not catch fish. can be changed in mod settings (startup).
+    - made drop down items in mod settings translatable
+    - adjusted oil spawning math, with higher increase in oil richness for far away oil patches
+    - updated russian locale
+---------------------------------------------------------------------------------------------------
+Version: 0.0.54
+Date: 2020-05-15
+  Bugfixes:
+    - made it impossible to create ghost from bridges which led to crashes
+    - made it impossible to landfill over waterways when used currently by ship
+    - fixed crash when trying to place landfill under bridge and made bridges a lot more resilient to crashes in general
+    - invalid bridge entities are now deleted on detection
+---------------------------------------------------------------------------------------------------
+Version: 0.0.53
+  Bugfixes:
+    - fixed crash on building rolling stock introduced in last update
+---------------------------------------------------------------------------------------------------
+Version: 0.0.52
+  Bugfixes:
+    - ships can not be split into separate rollings stocks anymore
+    - ships can not be connected to other rolling stops (including other ships) anymore
+  Changes:
+    - added krastorio support
+---------------------------------------------------------------------------------------------------
+Version: 0.0.51
+  Changes:
+    - updated to factorio version 18
+    - removed all vanilla water reflections from ships
+  Bugfixes:
+    - fixed a crash due to invalid bridge entity. this still breaks the bridge, just no more crashes
+---------------------------------------------------------------------------------------------------
+Version: 0.0.50
+  Bugfixes:
+    - fixed waterways not being pipettable, bots sometimes not placing straight waterways
+    - fixed unintended addition of unfinished crane entity in last update
+---------------------------------------------------------------------------------------------------
+Version: 0.0.49
+Date: 2019-12-20
+  Changes:
+    - added storage to oil rig. Adjustable via mod setting, default is 100k.
+    - added gui to show current storage volume when clicking on oil rig.
+    - made oil tanker capacity adjustable in mod settings. Default is 250k.
+  Bugfixes:
+    - fixed placing landfill could delete part of bridges
+    - fixed not checking for previous driver when assigning player to ship
+    - fixed crash when deleting bridge by robot when bridge was opened
+---------------------------------------------------------------------------------------------------
+Version: 0.0.48
+Date: 2019-11-10
+  Bugfixes:
+    - fixed crashed on startup introduced in factorio 0.17.75
+    - fixed messed up port graphics
+    - fixed messed up bridge graphics during placement
+    - fixed typo and increased ships health
+---------------------------------------------------------------------------------------------------
+Version: 0.0.47
+  Changes:
+    - added support for multiple surfaces
+    - bridges can only be mined now, when no trains or ships are currently crossing, fixing a bug with unminable rails/waterways
+---------------------------------------------------------------------------------------------------
+Version: 0.0.46
+Date: 2019-08-21
+  Changes:
+    - Added compatibility to ctp mod
+---------------------------------------------------------------------------------------------------
+Version: 0.0.45
+  Bugfixes:
+    - Removed ship pump <-> train collision as a hotfix to the broken pumps from the 0.17.56 update (pumps need to placed closer to the waterways now than before)
+    - Updated pump placement markers to the updated positions
+---------------------------------------------------------------------------------------------------
+Version: 0.0.44
+Date: 2019-07-11
+  Changes:
+    - Added mod option to change waterway visibility (requires restart)
+    - Added mod option to adjust boats/ships movement speed (requires restart)
+---------------------------------------------------------------------------------------------------
+Version: 0.0.43
+Date: 2019-07-09
+  Bugfixes:
+    - fixed crash on startup introduced by factorio 0.17.55
+---------------------------------------------------------------------------------------------------
+Version: 0.0.42
+  Bugfixes:
+    - fixed crash on startup when playing with bobs
+---------------------------------------------------------------------------------------------------
+Version: 0.0.41
+  Changes:
+    - fixed boat colliding with fish
+    - added support for transport group mod
+---------------------------------------------------------------------------------------------------
+Version: 0.0.40
+Date: 2019-05-13
+  Changes:
+    - changes floating power pole collision box size to make them chunk aligned
+    - increase oil tanker capacity too match cargo ships
+    - adjusted oilrig pollution after 0.17.12 pollution change
+  Bugfixes:
+    - fixed surface bug in creativemode
+---------------------------------------------------------------------------------------------------
+Version: 0.0.39
+Date: 2019-04-13
+  Changes:
+    - merged compatibility update for Multiple Unit Train Control
+---------------------------------------------------------------------------------------------------
+Version: 0.0.38
+  Changes:
+    - added compatibility to Aix-Matter
+---------------------------------------------------------------------------------------------------
+Version: 0.0.37
+  Bugfixes:
+    - fixed incompatibility with hovercrafts mod, that caused getting stuck when leaving ships
+---------------------------------------------------------------------------------------------------
+Version: 0.0.36
+  Changes:
+    - updated russian locale
+    - updated hungarian locale
+    - added compatibility to 0.17-port of the hovercraft mod
+  Bugfixes:
+    - fixed bridges not working in some cases due to misplaced signals
+    - fixed brides being placeable to close too each other, causing them to not work
+    - fixed water ways not colliding with bridges and other objects
+    - fixed some typos
+    - fixed bridge graphic being offset during placement
+---------------------------------------------------------------------------------------------------
+Version: 0.0.35
+  Changes:
+    - fixed changelogs not showing ingame (thanks to PI-C for this fix)
+  Bugfixes:
+    - fixed crash when blueprinting tiles only
+    - fixed crash when updating blueprint
+---------------------------------------------------------------------------------------------------
+Version: 0.0.34
+Date: 2019-03-18
+  Changes:
+    - made waterways blueprintable
+  Bugfixes:
+    - fixed hidden items appearing in signal-tab
+    - fixed invisible signals producing light cones in train brdiges
+---------------------------------------------------------------------------------------------------
+Version: 0.0.33
+
+  Bugfixes:
+    - fixed bug where player could not get out of boat
+
+---------------------------------------------------------------------------------------------------
+Version: 0.0.32
+
+  Bugfixes:
+    - fixed ships destroying buoys & ports
+---------------------------------------------------------------------------------------------------
+Version: 0.0.31
+
+  Changes:
+    - Landfill will not be placed over existing water based entities anymore
+    - Added missing technology descriptions
+    - changed waterways to not cost any resources and stack to 1000
+  Bugfixes:
+    - fixed crash when building landfill with robots
+    - fixed boat colliding with oil wells
+    - fixed player sometimes getting stuck when leaving ships
+---------------------------------------------------------------------------------------------------
+Version: 0.0.30
+
+  Bugfixes:
+    - fixed crash on startup introduced in 0.0.29
+---------------------------------------------------------------------------------------------------
+Version: 0.0.29
+
+  Changes:
+    - changed Floating Power pole recipe to be less expensive
+    - updated wire connection points of floating power pole to match graphics
+
+  Bugfixes:
+    - fixed unsymetrical lights on oil rig (needs to be placed again to take effect)
+    - fixed incompatibility issue with bobs power
+---------------------------------------------------------------------------------------------------
+Version: 0.0.28
+
+  Changes:
+    - added visualisation of possible ship-pump placement position at nearby ports when the former is selected by a player
+    - deep oil disappears now when landfilling over it
+    - made all invisible helper entities unselectable/uncopiable
+    - made all ships unblueprintable/uncopiable
+  Bugfixes:
+    - fixed oil rig being partly deleted, with invisible entities remaining, when placing landfill underneath oil rig
+---------------------------------------------------------------------------------------------------
+Version: 0.0.27
+
+  Changes:
+    - updated to factorio 0.17
+    - added korean translation
+    - made deep sea oil extraction need chemical science to research
+      (this can be disabled in the mods startup settings)
+---------------------------------------------------------------------------------------------------
+Version: 0.0.26
+
+  Changes:
+    - changed bridge icon to be more recognisable
+    - updated hungarian translation
+  Bugfixes:
+    - fixed crash when placing terrain in creative mode
+    - fixed crash when mining bridge entity with bots
+
+---------------------------------------------------------------------------------------------------
+Version: 0.0.25
+
+  Changes:
+    - added fully automatic lifting train-bridges
+    - decreased sound volume of ship engines
+    - change some items position in build menu
+  Bugfixes:
+    - fixed water ways giving the wrong amount of rails when mined
+    - fixed water ways being placeable ontop of each other
+
+---------------------------------------------------------------------------------------------------
+Version: 0.0.24
+
+  Changes:
+    - make waterways more transparent/less standing out
+    - added rail-segment-visualization for placing buoys
+    - added hungarian translation
+    - increased oil rigs module slots to 3 and slightly decreased power demand
+---------------------------------------------------------------------------------------------------
+Version: 0.0.23
+
+  Changes:
+    - completely reworked waterway placement system too fix issues introduced with release 0.0.20 and 0.0.21, like buoys being placeable at wrong positions
+      (as a result blueprints now only work to a limited extend with waterways)
+    - changed deep sea oil to produce multi phase oil when angles petrochem is enabled
+
+---------------------------------------------------------------------------------------------------
+Version: 0.0.22
+
+  Changes:
+    - added italian translation
+    - updated japanese translation
+    - changed port wire connections to fit the sprites
+  Bugfixes:
+    - fixed deep sea oil spawning on land
+    - fixed boat being not placeable when hovercraft mod is enabled
+    - fixed crash when placing waterways ontop of each other by bots
+
+---------------------------------------------------------------------------------------------------
+Version: 0.0.21
+
+  Bugfixes:
+    - fixed waterways being placeable ontop of each other resulting in corrupted save files
+    - fixed typo in dependencies
+    - fixed mining floating pole resulting in normal power pole
+
+---------------------------------------------------------------------------------------------------
+Version: 0.0.20
+
+  Changes:
+    - made boat be placaeble as an independent vehicle next to being placeable on waterways as well
+    - added Seablock compatibility
+    - fixed research icons
+    - fixed boat light
+    - fixed boat sprite shift
+    - increased amount of boat splash animations
+
+---------------------------------------------------------------------------------------------------
+Version: 0.0.19
+
+  Changes:
+    - fixed debug message being shown
+    - added sound to ship and boat engines
+    - added water splash animations to ship and boat engines
+    - made ship engines instead of cargo area target of SHIFT+Enter
+---------------------------------------------------------------------------------------------------
+Version: 0.0.18
+
+  Changes:
+    - added new small and fast boat
+    - made compatible with islands world mod
+    - changed some icons
+
+---------------------------------------------------------------------------------------------------
+Version: 0.0.17
+
+  Changes:
+    - added compatibility to factorio world and newIslands
+    - fixed oil rigs not working after being placed by bots
+    - added japanese locales
+
+---------------------------------------------------------------------------------------------------
+Version: 0.0.16
+
+  Changes:
+    - added new tank-ship sprites
+    - added russian and german translations
+    - fixed loading pumps collision mask (it now has one :P)
+
+---------------------------------------------------------------------------------------------------
+Version: 0.0.15
+
+  Changes:
+    - fixed bug in the long reach mechanics
+
+---------------------------------------------------------------------------------------------------
+Version: 0.0.14
+
+  Changes:
+    - fixed bug that caused buoys not being placeable on straight water ways (as a result water ways and normal rails can be joined again)
+
+---------------------------------------------------------------------------------------------------
+Version: 0.0.13
+
+  Changes:
+    - added enforcement of correct engine spawning. All placed ships are guaranteed to spawn with a correctly oriented engine unit and if spawning the engine is not possible, ships can not be placed.
+    - ships cant be placed on rails and trains can't be placed on waterways anymore. Furthermore its now impossible to connect rails and water ways. no more swimming trains, sry!
+    - fixed two crashes related to the reach increase and ship placement.
+    - added floating electric poles, making it easier to supply island-outpost with electricity.
+
+---------------------------------------------------------------------------------------------------
+Version: 0.0.12
+
+  Changes:
+    - fix migration crash introduced in last update
+
+---------------------------------------------------------------------------------------------------
+Version: 0.0.11
+
+  Changes:
+    - increased width of waterways. can't be placed right next to land anymore (one tile minimum distance). already placed entities are not affected. This change should fix people getting stuck when leaving the ship.
+    - changed how ports are placed. merged port and "land-based port" into single entity. should be a lot easier to place now.
+    - adjusted selection boxes of buoys and ports to actually match their sprites
+    - increased distance for entering and leaving ships
+    - ship engines now get placed correctly when building ships on diagonal waterways (not curves)
+
+---------------------------------------------------------------------------------------------------
+Version: 0.0.10
+
+  Changes:
+    - new model for the cargo-ship with animated doors. Thanks to PeteTheLich for his help with the 3D-model
+    - fixed a (rare??) bug where destroying or mining the oil-rig lead to crashes
+    - increased the ships engine size in order to be better reachable by inserters
+
+---------------------------------------------------------------------------------------------------
+Version: 0.0.9
+
+  Changes:
+    - fixed fuel inventory of cargo ships being lost when ship is mined
+    - added radars sight (not exploration) to oil rigs
+    - fixed oil-rigs being enabled without research
+
+---------------------------------------------------------------------------------------------------
+Version: 0.0.8
+
+  Changes:
+    - added multiplayer compatibility for entering and leaving ships
+    - deep sea oil richness now increases with distance from startpoint
+
+---------------------------------------------------------------------------------------------------
+Version: 0.0.7
+
+  Changes:
+    - fixed a performance issue. thanks to  jessefjxm for their input!
+    - made newly placed waterways indestructible. already placed waterways are not effected.
+
+---------------------------------------------------------------------------------------------------
+Version: 0.0.6
+
+  Changes:
+    - (for now) removed player-level from oil-rigs collision mask. this resolves a issue, where for some player the oil-rig was not placeable
+    - increased water way stack size
+    - added lower options for oil frequency spawning
+    - added light to the tanker and cargo ship
+---------------------------------------------------------------------------------------------------
+Version: 0.0.5
+
+  Changes:
+    - again fixed a bug when mining an oil platform on factorio version < 16.40, this time really
+    - corrected collision masks of oil platform
+    - added missing locale entry
+
+---------------------------------------------------------------------------------------------------
+Version: 0.0.4
+
+  Changes:
+    - added the possibility to disable deep sea oil (select 'none' for frequency)
+    - fixed a bug when mining an oil platform on factorio version < 16.40
+
+
+---------------------------------------------------------------------------------------------------
+Version: 0.0.3
+
+  Changes:
+    - added configurable deep sea oil
+    - added oil platforms
+    - added a land based version of the  port
+    - added dynamic reach increase while holding waterways, buoys etc.
+
+---------------------------------------------------------------------------------------------------
+Version: 0.0.2
+
+  Changes:
+    - added oil tankers and ship loading pumps
+
+---------------------------------------------------------------------------------------------------
+Version: 0.0.1
+
+  Changes:
+    - added infrastructure for ships (waterways, buoys, ports)
+    - added cargo ships
