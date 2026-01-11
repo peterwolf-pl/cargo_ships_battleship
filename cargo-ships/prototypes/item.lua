@@ -74,28 +74,6 @@ data:extend{
   },
   {
     type = "item-with-entity-data",
-    name = "battleship",
-    icons = {
-      {
-        icon = GRAPHICSPATH .. "icons/cargoship_icon.png",
-        icon_size = 64,
-        tint = {0.75, 0.75, 0.95}
-      },
-      {
-        icon = "__base__/graphics/icons/gun-turret.png",
-        icon_size = 64,
-        scale = 0.5,
-        shift = {8, 8}
-      }
-    },
-    flags = {},
-    subgroup = subgroup_ship,
-    order = "a[water-system]-g[battleship]",
-    place_result = "battleship",
-    stack_size = 1,
-  },
-  {
-    type = "item-with-entity-data",
     name = "oil_tanker",
     icon = GRAPHICSPATH .. "icons/tanker.png",
     icon_size = 64,

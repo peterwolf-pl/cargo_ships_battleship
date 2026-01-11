@@ -27,21 +27,6 @@ data:extend{
   },
   {
     type = "recipe",
-    name = "battleship",
-    enabled = false,
-    energy_required = 25,
-    ingredients = {
-      {type="item", name="steel-plate", amount=400},
-      {type="item", name="engine-unit", amount=80},
-      {type="item", name="iron-gear-wheel", amount=90},
-      {type="item", name="electronic-circuit", amount=40},
-      {type="item", name="explosives", amount=50},
-      {type="item", name="gun-turret", amount=4}
-    },
-    results = {{type="item", name="battleship", amount=1}},
-  },
-  {
-    type = "recipe",
     name = "oil_tanker",
     enabled = false,
     energy_required = 15,
