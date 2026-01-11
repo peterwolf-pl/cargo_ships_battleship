@@ -1,5 +1,6 @@
-local BATTLESHIP_NTH_TICK = 10
+local BATTLESHIP_NTH_TICK = 5
 local BATTLESHIP_NAME = "battleship"
+local INDEP_BATTLESHIP_NAME = "indep-battleship"
 local turret_names = {
   "battleship-cannon-1",
   "battleship-cannon-2",
@@ -34,6 +35,10 @@ local function register_battleship()
       engine = "cargo_ship_engine",
       engine_scale = 1,
       engine_at_front = false,
+    })
+    remote.call("cargo-ships", "add_boat", {
+      name = INDEP_BATTLESHIP_NAME,
+      rail_version = BATTLESHIP_NAME,
     })
   end
 end
@@ -87,7 +92,12 @@ local function refill_ammo(entry)
   if not (ship and ship.valid) then
     return
   end
-  local cargo_inventory = ship.get_inventory(defines.inventory.cargo_wagon)
+  local cargo_inventory
+  if ship.type == "car" then
+    cargo_inventory = ship.get_inventory(defines.inventory.car_trunk)
+  else
+    cargo_inventory = ship.get_inventory(defines.inventory.cargo_wagon)
+  end
   if not cargo_inventory or cargo_inventory.is_empty() then
     return
   end
@@ -156,14 +166,14 @@ end
 
 local function on_built(event)
   local entity = event.entity or event.destination
-  if entity and entity.valid and entity.name == BATTLESHIP_NAME then
+  if entity and entity.valid and (entity.name == BATTLESHIP_NAME or entity.name == INDEP_BATTLESHIP_NAME) then
     ensure_entry(entity)
   end
 end
 
 local function on_removed(event)
   local entity = event.entity
-  if entity and entity.valid and entity.name == BATTLESHIP_NAME then
+  if entity and entity.valid and (entity.name == BATTLESHIP_NAME or entity.name == INDEP_BATTLESHIP_NAME) then
     remove_ship(entity)
   end
 end
@@ -171,7 +181,7 @@ end
 local function init_existing()
   ensure_globals()
   for _, surface in pairs(game.surfaces) do
-    local ships = surface.find_entities_filtered{name = BATTLESHIP_NAME}
+    local ships = surface.find_entities_filtered{name = {BATTLESHIP_NAME, INDEP_BATTLESHIP_NAME}}
     for _, ship in pairs(ships) do
       ensure_entry(ship)
     end

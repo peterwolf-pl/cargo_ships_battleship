@@ -1,8 +1,9 @@
 {
-  "name": "battleship",
-  "version": "0.1.0",
+  "name": "Battleship",
+  "version": "0.1.3",
   "title": "Cargo Ships: Battleship",
-  "author": "OpenAI",
+  "author": "peterwolf_pl",
+  "description": "Battleship v0.1.0 submod for cargo ships. Adds artillery turret to cargo ships - creating Battleships . Own graphics coming soon. Use with create artillery target remote ",
   "factorio_version": "2.0",
   "dependencies": [
     "cargo-ships >= 1.0.28",
