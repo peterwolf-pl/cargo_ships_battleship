@@ -33,7 +33,6 @@ is_rail = util.list_to_map{
   "rail-ramp",
 }
 
-
 -- spawn additional invisible entities
 local function OnEntityBuilt(event)
 
@@ -596,4 +595,3 @@ setmetatable(_ENV,{
       .. serpent.line{key=key or '<nil>'}..'\n')
     end ,]]
   })
-
