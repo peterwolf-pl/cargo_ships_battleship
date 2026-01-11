@@ -757,8 +757,7 @@ cargo_ship_engine.corpse = nil
 ------------------------ BATTLESHIP CANNONS --------------------
 ----------------------------------------------------------------
 
-local battleship_cannon_base = table.deepcopy((data.raw["ammo-turret"] and data.raw["ammo-turret"]["gun-turret"])
-  or (data.raw["gun-turret"] and data.raw["gun-turret"]["gun-turret"]))
+local battleship_cannon_base = table.deepcopy(data.raw["artillery-turret"]["artillery-turret"])
 battleship_cannon_base.flags = {
   "placeable-off-grid",
   "not-on-map",
@@ -771,8 +770,7 @@ battleship_cannon_base.collision_box = {{0, 0}, {0, 0}}
 battleship_cannon_base.selection_box = {{0, 0}, {0, 0}}
 battleship_cannon_base.selection_priority = 0
 battleship_cannon_base.order = "z[battleship-cannon]"
-battleship_cannon_base.attack_parameters.range = 28
-battleship_cannon_base.attack_parameters.cooldown = 20
+battleship_cannon_base.attack_parameters.range = 40
 battleship_cannon_base.icons = {
   {
     icon = "__base__/graphics/icons/gun-turret.png",

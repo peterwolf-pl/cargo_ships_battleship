@@ -41,15 +41,14 @@ local battleship_turret_names = {
   "battleship-cannon-4",
 }
 local battleship_offsets = {
-  {x = -1.6, y = -5.6},
-  {x = 1.6, y = -2.4},
-  {x = -1.6, y = 2.4},
-  {x = 1.6, y = 5.6},
+  {x = 0, y = -6.2},
+  {x = 0, y = -2.1},
+  {x = 0, y = 2.1},
+  {x = 0, y = 6.2},
 }
 local battleship_ammo_whitelist = {
-  "uranium-rounds-magazine",
-  "piercing-rounds-magazine",
-  "firearm-magazine",
+  "explosive-cannon-shell",
+  "cannon-shell",
 }
 
 local function rotate_offset(offset, orientation)
@@ -125,7 +124,8 @@ local function refill_battleship_ammo(entry)
   end
   for _, turret in pairs(entry.turrets or {}) do
     if turret and turret.valid then
-      local ammo_inventory = turret.get_inventory(defines.inventory.turret_ammo)
+      local ammo_inventory = turret.get_inventory(defines.inventory.artillery_turret_ammo)
+        or turret.get_inventory(defines.inventory.turret_ammo)
       if ammo_inventory and ammo_inventory.is_empty() then
         for _, ammo_name in ipairs(battleship_ammo_whitelist) do
           local available = cargo_inventory.get_item_count(ammo_name)
