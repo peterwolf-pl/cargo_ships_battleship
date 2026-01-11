@@ -6,8 +6,8 @@ data:extend{
     energy_required = 25,
     ingredients = {
       {type="item", name="steel-plate", amount=400},
-      {type="item", name="engine-unit", amount=80},
-      {type="item", name="iron-gear-wheel", amount=90},
+      {type="item", name="engine-unit", amount=180},
+      {type="item", name="iron-gear-wheel", amount=190},
       {type="item", name="electronic-circuit", amount=40},
       {type="item", name="explosives", amount=50},
       {type="item", name="artillery-turret", amount=4}

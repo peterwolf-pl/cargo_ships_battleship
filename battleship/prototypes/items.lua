@@ -23,7 +23,7 @@ data:extend{
     },
     subgroup = subgroup_ship,
     order = "a[water-system]-g[battleship]",
-    place_result = "battleship",
+    place_result = "indep-battleship",
     stack_size = 1
   }
 }
