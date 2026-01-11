@@ -28,6 +28,9 @@ local patrol_boat_icons = {
 
 local cargo_ship = data.raw["cargo-wagon"]["cargo_ship"]
 local battleship = table.deepcopy(cargo_ship)
+local battleship_speed_multiplier = settings.startup["battleship-speed-multiplier"].value
+local patrol_boat_speed_multiplier = settings.startup["patrol-boat-speed-multiplier"].value
+local patrol_boat_missile_range_multiplier = settings.startup["patrol-boat-missile-range-multiplier"].value
 
 battleship.name = "battleship"
 battleship.icons = battleship_icons
@@ -35,6 +38,9 @@ battleship.icon = nil
 battleship.minable = {mining_time = 2, result = "battleship"}
 battleship.max_health = 7500
 battleship.inventory_size = 800
+if battleship.max_speed then
+  battleship.max_speed = battleship.max_speed * battleship_speed_multiplier
+end
 
 if battleship.pictures and battleship.pictures.rotated and battleship.pictures.rotated.layers then
   battleship.pictures.rotated.layers[1].tint = {0.75, 0.75, 0.95}
@@ -52,6 +58,9 @@ indep_battleship.collision_box = battleship.collision_box
 indep_battleship.selection_box = battleship.selection_box
 indep_battleship.localised_name = {"entity-name.battleship"}
 indep_battleship.localised_description = {"entity-description.battleship"}
+if indep_battleship.max_speed then
+  indep_battleship.max_speed = indep_battleship.max_speed * battleship_speed_multiplier
+end
 
 local artillery_base = table.deepcopy(data.raw["artillery-turret"]["artillery-turret"])
 artillery_base.flags = {
@@ -95,6 +104,9 @@ patrol_boat.max_health = 2000
 patrol_boat.inventory_size = 80
 patrol_boat.localised_name = {"entity-name.patrol-boat"}
 patrol_boat.localised_description = {"entity-description.patrol-boat"}
+if patrol_boat.max_speed then
+  patrol_boat.max_speed = patrol_boat.max_speed * patrol_boat_speed_multiplier
+end
 
 local indep_boat = data.raw["car"]["indep-boat"]
 local indep_patrol_boat = table.deepcopy(indep_boat)
@@ -106,6 +118,9 @@ indep_patrol_boat.max_health = patrol_boat.max_health
 indep_patrol_boat.inventory_size = patrol_boat.inventory_size
 indep_patrol_boat.localised_name = {"entity-name.patrol-boat"}
 indep_patrol_boat.localised_description = {"entity-description.patrol-boat"}
+if indep_patrol_boat.max_speed then
+  indep_patrol_boat.max_speed = indep_patrol_boat.max_speed * patrol_boat_speed_multiplier
+end
 
 local missile_turret = table.deepcopy(data.raw["ammo-turret"]["gun-turret"])
 local rocket_launcher = data.raw["gun"]["rocket-launcher"]
@@ -130,7 +145,7 @@ missile_turret.corpse = nil
 missile_turret.damaged_trigger_effect = nil
 missile_turret.order = "z[patrol-boat-missile-turret]"
 missile_turret.attack_parameters.ammo_category = "rocket"
-missile_turret.attack_parameters.range = rocket_launcher_range * 3
+missile_turret.attack_parameters.range = rocket_launcher_range * patrol_boat_missile_range_multiplier
 missile_turret.attack_parameters.cooldown = rocket_launcher_cooldown
 
 data:extend{
