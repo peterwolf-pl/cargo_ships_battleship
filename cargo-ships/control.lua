@@ -47,8 +47,7 @@ local battleship_offsets = {
   {x = 0, y = 6.2},
 }
 local battleship_ammo_whitelist = {
-  "explosive-cannon-shell",
-  "cannon-shell",
+  "artillery-shell",
 }
 
 local function rotate_offset(offset, orientation)
