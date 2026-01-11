@@ -4,6 +4,8 @@ local INDEP_BATTLESHIP_NAME = "indep-battleship"
 local PATROL_BOAT_NAME = "patrol-boat"
 local INDEP_PATROL_BOAT_NAME = "indep-patrol-boat"
 local PATROL_TURRET_NAME = "patrol-boat-missile-turret"
+local BATTLESHIP_RADAR_NAME = "battleship-radar"
+local PATROL_RADAR_NAME = "patrol-boat-radar"
 local turret_names = {
   "battleship-cannon-1",
   "battleship-cannon-2",
@@ -74,6 +76,20 @@ local function create_turret(ship, turret_name, offset)
   return turret
 end
 
+local function create_radar(ship, radar_name, offset)
+  local rotated_offset = rotate_offset(offset, ship.orientation)
+  local radar = ship.surface.create_entity{
+    name = radar_name,
+    position = {ship.position.x + rotated_offset.x, ship.position.y + rotated_offset.y},
+    force = ship.force,
+    create_build_effect_smoke = false,
+  }
+  if radar then
+    radar.operable = false
+  end
+  return radar
+end
+
 local function destroy_turrets(entry)
   if entry and entry.turrets then
     for _, turret in pairs(entry.turrets) do
@@ -81,6 +97,12 @@ local function destroy_turrets(entry)
         turret.destroy()
       end
     end
+  end
+end
+
+local function destroy_radar(entry)
+  if entry and entry.radar and entry.radar.valid then
+    entry.radar.destroy()
   end
 end
 
@@ -101,6 +123,23 @@ local function sync_battleship_turrets(entry)
       turret.teleport({ship.position.x + offset.x, ship.position.y + offset.y})
       turret.force = ship.force
     end
+  end
+end
+
+local function sync_battleship_radar(entry)
+  local ship = entry.ship
+  if not (ship and ship.valid) then
+    return
+  end
+  local radar = entry.radar
+  if not (radar and radar.valid) then
+    radar = create_radar(ship, BATTLESHIP_RADAR_NAME, {x = 0, y = 0})
+    entry.radar = radar
+  end
+  if radar and radar.valid then
+    local offset = rotate_offset({x = 0, y = 0}, ship.orientation)
+    radar.teleport({ship.position.x + offset.x, ship.position.y + offset.y})
+    radar.force = ship.force
   end
 end
 
@@ -156,6 +195,23 @@ local function sync_patrol_turret(entry)
   end
 end
 
+local function sync_patrol_radar(entry)
+  local ship = entry.ship
+  if not (ship and ship.valid) then
+    return
+  end
+  local radar = entry.radar
+  if not (radar and radar.valid) then
+    radar = create_radar(ship, PATROL_RADAR_NAME, {x = 0, y = 0})
+    entry.radar = radar
+  end
+  if radar and radar.valid then
+    local offset = rotate_offset({x = 0, y = 0}, ship.orientation)
+    radar.teleport({ship.position.x + offset.x, ship.position.y + offset.y})
+    radar.force = ship.force
+  end
+end
+
 local function refill_patrol_ammo(entry)
   local ship = entry.ship
   if not (ship and ship.valid) then
@@ -199,21 +255,23 @@ local function ensure_entry(ship)
   if ship.name == BATTLESHIP_NAME or ship.name == INDEP_BATTLESHIP_NAME then
     local entry = storage.battleships[ship.unit_number]
     if not entry then
-      entry = {ship = ship, turrets = {}}
+      entry = {ship = ship, turrets = {}, radar = nil}
       storage.battleships[ship.unit_number] = entry
     else
       entry.ship = ship
     end
     sync_battleship_turrets(entry)
+    sync_battleship_radar(entry)
   elseif ship.name == PATROL_BOAT_NAME or ship.name == INDEP_PATROL_BOAT_NAME then
     local entry = storage.patrol_boats[ship.unit_number]
     if not entry then
-      entry = {ship = ship, turret = nil}
+      entry = {ship = ship, turret = nil, radar = nil}
       storage.patrol_boats[ship.unit_number] = entry
     else
       entry.ship = ship
     end
     sync_patrol_turret(entry)
+    sync_patrol_radar(entry)
   else
     return
   end
@@ -227,6 +285,7 @@ local function remove_ship(ship)
   local entry = storage.battleships[ship.unit_number]
   if entry then
     destroy_turrets(entry)
+    destroy_radar(entry)
     storage.battleships[ship.unit_number] = nil
   end
   local patrol_entry = storage.patrol_boats[ship.unit_number]
@@ -234,6 +293,7 @@ local function remove_ship(ship)
     if patrol_entry.turret and patrol_entry.turret.valid then
       patrol_entry.turret.destroy()
     end
+    destroy_radar(patrol_entry)
     storage.patrol_boats[ship.unit_number] = nil
   end
 end
@@ -249,6 +309,7 @@ local function on_nth_tick()
         storage.battleships[unit_number] = nil
       else
         sync_battleship_turrets(entry)
+        sync_battleship_radar(entry)
         refill_battleship_ammo(entry)
       end
     end
@@ -259,9 +320,11 @@ local function on_nth_tick()
         if entry.turret and entry.turret.valid then
           entry.turret.destroy()
         end
+        destroy_radar(entry)
         storage.patrol_boats[unit_number] = nil
       else
         sync_patrol_turret(entry)
+        sync_patrol_radar(entry)
         refill_patrol_ammo(entry)
       end
     end
