@@ -6,6 +6,7 @@ local INDEP_PATROL_BOAT_NAME = "indep-patrol-boat"
 local PATROL_TURRET_NAME = "patrol-boat-missile-turret"
 local RADAR_CHART_TICKS = 60
 local RADAR_RANGE_MULTIPLIER = 3
+local RADAR_BASE_RANGE = 14
 local turret_names = {
   "battleship-cannon-1",
   "battleship-cannon-2",
@@ -114,11 +115,7 @@ local function chart_ship_area(entry)
   if entry.last_chart_tick and (game.tick - entry.last_chart_tick) < RADAR_CHART_TICKS then
     return
   end
-  local radar_proto = game.entity_prototypes["radar"]
-  if not radar_proto then
-    return
-  end
-  local range = radar_proto.max_distance_of_sector_revealed * RADAR_RANGE_MULTIPLIER
+  local range = RADAR_BASE_RANGE * RADAR_RANGE_MULTIPLIER
   if range <= 0 then
     return
   end
