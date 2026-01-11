@@ -121,7 +121,6 @@ missile_turret.flags = {
 missile_turret.icons = patrol_boat_icons
 missile_turret.icon = nil
 missile_turret.minable = nil
-missile_turret.energy_source = {type = "void"}
 missile_turret.max_health = 800
 missile_turret.collision_box = {{0, 0}, {0, 0}}
 missile_turret.selection_box = {{0, 0}, {0, 0}}
