@@ -130,7 +130,9 @@ local function refill_battleship_ammo(entry)
         for _, ammo_name in ipairs(battleship_ammo_whitelist) do
           local available = cargo_inventory.get_item_count(ammo_name)
           if available > 0 then
-            local stack_size = game.item_prototypes[ammo_name].stack_size
+            local stack_size = (prototypes.item and prototypes.item[ammo_name] and prototypes.item[ammo_name].stack_size)
+              or (game.item_prototypes and game.item_prototypes[ammo_name] and game.item_prototypes[ammo_name].stack_size)
+              or 1
             local to_move = math.min(available, stack_size)
             local inserted = ammo_inventory.insert{name = ammo_name, count = to_move}
             if inserted > 0 then
