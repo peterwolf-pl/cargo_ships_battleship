@@ -5,8 +5,6 @@ local PATROL_BOAT_NAME = "patrol-boat"
 local INDEP_PATROL_BOAT_NAME = "indep-patrol-boat"
 local PATROL_TURRET_NAME = "patrol-boat-missile-turret"
 local RADAR_CHART_TICKS = 60
-local RADAR_RANGE_MULTIPLIER = 3
-local RADAR_BASE_RANGE = 114
 local turret_names = {
   "battleship-cannon-1",
   "battleship-cannon-2",
@@ -31,6 +29,16 @@ local function rotate_offset(offset, orientation)
     x = offset.x * cos_angle - offset.y * sin_angle,
     y = offset.x * sin_angle + offset.y * cos_angle,
   }
+end
+
+local function get_radar_range(ship_name)
+  if ship_name == BATTLESHIP_NAME or ship_name == INDEP_BATTLESHIP_NAME then
+    return settings.global["battleship-radar-range"].value
+  end
+  if ship_name == PATROL_BOAT_NAME or ship_name == INDEP_PATROL_BOAT_NAME then
+    return settings.global["patrol-boat-radar-range"].value
+  end
+  return 0
 end
 
 local function ensure_globals()
@@ -115,7 +123,7 @@ local function chart_ship_area(entry)
   if entry.last_chart_tick and (game.tick - entry.last_chart_tick) < RADAR_CHART_TICKS then
     return
   end
-  local range = RADAR_BASE_RANGE * RADAR_RANGE_MULTIPLIER
+  local range = get_radar_range(ship.name)
   if range <= 0 then
     return
   end
