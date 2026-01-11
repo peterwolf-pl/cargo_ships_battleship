@@ -770,7 +770,9 @@ battleship_cannon_base.collision_box = {{0, 0}, {0, 0}}
 battleship_cannon_base.selection_box = {{0, 0}, {0, 0}}
 battleship_cannon_base.selection_priority = 0
 battleship_cannon_base.order = "z[battleship-cannon]"
-battleship_cannon_base.attack_parameters.range = 40
+if battleship_cannon_base.attack_parameters then
+  battleship_cannon_base.attack_parameters.range = 40
+end
 battleship_cannon_base.icons = {
   {
     icon = "__base__/graphics/icons/gun-turret.png",
