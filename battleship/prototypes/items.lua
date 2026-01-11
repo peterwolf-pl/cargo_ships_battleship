@@ -25,5 +25,26 @@ data:extend{
     order = "a[water-system]-g[battleship]",
     place_result = "indep-battleship",
     stack_size = 1
+  },
+  {
+    type = "item-with-entity-data",
+    name = "patrol-boat",
+    icons = {
+      {
+        icon = GRAPHICSPATH .. "icons/boat.png",
+        icon_size = 64,
+        tint = {0.7, 0.9, 1}
+      },
+      {
+        icon = "__base__/graphics/icons/rocket-launcher.png",
+        icon_size = 64,
+        scale = 0.5,
+        shift = {8, 8}
+      }
+    },
+    subgroup = subgroup_ship,
+    order = "a[water-system]-f[patrol-boat]",
+    place_result = "indep-patrol-boat",
+    stack_size = 1
   }
 }

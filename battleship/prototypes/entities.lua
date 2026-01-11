@@ -12,6 +12,20 @@ local battleship_icons = {
   }
 }
 
+local patrol_boat_icons = {
+  {
+    icon = GRAPHICSPATH .. "icons/boat.png",
+    icon_size = 64,
+    tint = {0.7, 0.9, 1}
+  },
+  {
+    icon = "__base__/graphics/icons/rocket-launcher.png",
+    icon_size = 64,
+    scale = 0.5,
+    shift = {8, 8}
+  }
+}
+
 local cargo_ship = data.raw["cargo-wagon"]["cargo_ship"]
 local battleship = table.deepcopy(cargo_ship)
 
@@ -70,11 +84,63 @@ battleship_cannon_3.name = "battleship-cannon-3"
 local battleship_cannon_4 = table.deepcopy(artillery_base)
 battleship_cannon_4.name = "battleship-cannon-4"
 
+local boat = data.raw["cargo-wagon"]["boat"]
+local patrol_boat = table.deepcopy(boat)
+patrol_boat.name = "patrol-boat"
+patrol_boat.icons = patrol_boat_icons
+patrol_boat.icon = nil
+patrol_boat.minable = {mining_time = 1, result = "patrol-boat"}
+patrol_boat.placeable_by = {{item = "patrol-boat", count = 1}}
+patrol_boat.max_health = 2000
+patrol_boat.inventory_size = 80
+patrol_boat.localised_name = {"entity-name.patrol-boat"}
+patrol_boat.localised_description = {"entity-description.patrol-boat"}
+
+local indep_boat = data.raw["car"]["indep-boat"]
+local indep_patrol_boat = table.deepcopy(indep_boat)
+indep_patrol_boat.name = "indep-patrol-boat"
+indep_patrol_boat.icons = patrol_boat_icons
+indep_patrol_boat.icon = nil
+indep_patrol_boat.minable = {mining_time = 1, result = "patrol-boat"}
+indep_patrol_boat.max_health = patrol_boat.max_health
+indep_patrol_boat.inventory_size = patrol_boat.inventory_size
+indep_patrol_boat.localised_name = {"entity-name.patrol-boat"}
+indep_patrol_boat.localised_description = {"entity-description.patrol-boat"}
+
+local missile_turret = table.deepcopy(data.raw["ammo-turret"]["gun-turret"])
+local rocket_launcher = data.raw["gun"]["rocket-launcher"]
+local rocket_launcher_range = rocket_launcher and rocket_launcher.attack_parameters and rocket_launcher.attack_parameters.range or 25
+local rocket_launcher_cooldown = rocket_launcher and rocket_launcher.attack_parameters and rocket_launcher.attack_parameters.cooldown or missile_turret.attack_parameters.cooldown
+missile_turret.name = "patrol-boat-missile-turret"
+missile_turret.flags = {
+  "placeable-off-grid",
+  "not-on-map",
+  "not-blueprintable",
+  "not-deconstructable"
+}
+missile_turret.icons = patrol_boat_icons
+missile_turret.icon = nil
+missile_turret.minable = nil
+missile_turret.max_health = 800
+missile_turret.collision_box = {{0, 0}, {0, 0}}
+missile_turret.collision_mask = {layers = {}}
+missile_turret.selection_box = {{0, 0}, {0, 0}}
+missile_turret.selection_priority = 0
+missile_turret.corpse = nil
+missile_turret.damaged_trigger_effect = nil
+missile_turret.order = "z[patrol-boat-missile-turret]"
+missile_turret.attack_parameters.ammo_category = "rocket"
+missile_turret.attack_parameters.range = rocket_launcher_range * 3
+missile_turret.attack_parameters.cooldown = rocket_launcher_cooldown
+
 data:extend{
   battleship,
   indep_battleship,
   battleship_cannon_1,
   battleship_cannon_2,
   battleship_cannon_3,
-  battleship_cannon_4
+  battleship_cannon_4,
+  patrol_boat,
+  indep_patrol_boat,
+  missile_turret
 }

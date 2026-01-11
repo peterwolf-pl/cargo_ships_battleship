@@ -12,7 +12,8 @@ data:extend{
     icon = GRAPHICSPATH .. "technology/cargo_ships.png",
     icon_size = 256,
     effects = {
-      unlock("battleship")
+      unlock("battleship"),
+      unlock("patrol-boat")
     },
     prerequisites = {"cargo_ships", "military-3", "artillery"},
     unit = {
