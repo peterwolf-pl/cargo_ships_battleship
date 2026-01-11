@@ -123,7 +123,7 @@ missile_turret.icon = nil
 missile_turret.minable = nil
 missile_turret.max_health = 800
 missile_turret.collision_box = {{0, 0}, {0, 0}}
-missile_turret.collision_mask = {}
+missile_turret.collision_mask = {layers = {}}
 missile_turret.selection_box = {{0, 0}, {0, 0}}
 missile_turret.selection_priority = 0
 missile_turret.corpse = nil
