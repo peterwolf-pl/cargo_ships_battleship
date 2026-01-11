@@ -757,7 +757,8 @@ cargo_ship_engine.corpse = nil
 ------------------------ BATTLESHIP CANNONS --------------------
 ----------------------------------------------------------------
 
-local battleship_cannon_base = table.deepcopy(data.raw["gun-turret"]["gun-turret"])
+local battleship_cannon_base = table.deepcopy((data.raw["ammo-turret"] and data.raw["ammo-turret"]["gun-turret"])
+  or (data.raw["gun-turret"] and data.raw["gun-turret"]["gun-turret"]))
 battleship_cannon_base.flags = {
   "placeable-off-grid",
   "not-on-map",
