@@ -725,4 +725,11 @@ cargo_ship_engine.drive_over_tie_trigger = nil
 cargo_ship_engine.factoriopedia_simulation = nil
 cargo_ship_engine.corpse = nil
 
-data:extend{cargo_ship_engine, cargo_ship, oil_tanker, indep_boat, boat, boat_engine}
+data:extend{
+  cargo_ship_engine,
+  cargo_ship,
+  oil_tanker,
+  indep_boat,
+  boat,
+  boat_engine
+}
