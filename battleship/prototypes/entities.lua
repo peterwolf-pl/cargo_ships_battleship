@@ -26,6 +26,19 @@ if battleship.pictures and battleship.pictures.rotated and battleship.pictures.r
   battleship.pictures.rotated.layers[1].tint = {0.75, 0.75, 0.95}
 end
 
+local indep_battleship = table.deepcopy(data.raw["car"]["indep-boat"])
+indep_battleship.name = "indep-battleship"
+indep_battleship.icons = battleship_icons
+indep_battleship.icon = nil
+indep_battleship.minable = {mining_time = 1, result = "battleship"}
+indep_battleship.max_health = battleship.max_health
+indep_battleship.inventory_size = battleship.inventory_size
+indep_battleship.weight = battleship.weight or indep_battleship.weight
+indep_battleship.collision_box = battleship.collision_box
+indep_battleship.selection_box = battleship.selection_box
+indep_battleship.localised_name = {"entity-name.battleship"}
+indep_battleship.localised_description = {"entity-description.battleship"}
+
 local artillery_base = table.deepcopy(data.raw["artillery-turret"]["artillery-turret"])
 artillery_base.flags = {
   "placeable-off-grid",
@@ -59,6 +72,7 @@ battleship_cannon_4.name = "battleship-cannon-4"
 
 data:extend{
   battleship,
+  indep_battleship,
   battleship_cannon_1,
   battleship_cannon_2,
   battleship_cannon_3,
