@@ -6,7 +6,7 @@ local INDEP_PATROL_BOAT_NAME = "indep-patrol-boat"
 local PATROL_TURRET_NAME = "patrol-boat-missile-turret"
 local RADAR_CHART_TICKS = 60
 local RADAR_RANGE_MULTIPLIER = 3
-local RADAR_BASE_RANGE = 14
+local RADAR_BASE_RANGE = 114
 local turret_names = {
   "battleship-cannon-1",
   "battleship-cannon-2",
@@ -53,7 +53,7 @@ local function register_ships()
     remote.call("cargo-ships", "add_ship", {
       name = PATROL_BOAT_NAME,
       engine = "boat_engine",
-      engine_scale = 0.3,
+      engine_scale = 1,
       engine_at_front = true,
     })
     remote.call("cargo-ships", "add_boat", {
