@@ -133,35 +133,6 @@ missile_turret.attack_parameters.ammo_category = "rocket"
 missile_turret.attack_parameters.range = rocket_launcher_range * 3
 missile_turret.attack_parameters.cooldown = rocket_launcher_cooldown
 
-local radar_base = table.deepcopy(data.raw["radar"]["radar"])
-radar_base.flags = {
-  "placeable-off-grid",
-  "not-on-map",
-  "not-blueprintable",
-  "not-deconstructable"
-}
-radar_base.energy_source = {type = "void"}
-radar_base.minable = nil
-radar_base.collision_box = {{0, 0}, {0, 0}}
-radar_base.collision_mask = {layers = {}}
-radar_base.selection_box = {{0, 0}, {0, 0}}
-radar_base.selection_priority = 0
-radar_base.corpse = nil
-radar_base.damaged_trigger_effect = nil
-radar_base.energy_usage = "1W"
-radar_base.max_distance_of_sector_revealed = radar_base.max_distance_of_sector_revealed * 3
-radar_base.max_distance_of_nearby_sector_revealed = radar_base.max_distance_of_nearby_sector_revealed * 3
-
-local battleship_radar = table.deepcopy(radar_base)
-battleship_radar.name = "battleship-radar"
-battleship_radar.icons = battleship_icons
-battleship_radar.icon = nil
-
-local patrol_boat_radar = table.deepcopy(radar_base)
-patrol_boat_radar.name = "patrol-boat-radar"
-patrol_boat_radar.icons = patrol_boat_icons
-patrol_boat_radar.icon = nil
-
 data:extend{
   battleship,
   indep_battleship,
@@ -171,7 +142,5 @@ data:extend{
   battleship_cannon_4,
   patrol_boat,
   indep_patrol_boat,
-  missile_turret,
-  battleship_radar,
-  patrol_boat_radar
+  missile_turret
 }
